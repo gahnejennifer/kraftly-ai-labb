@@ -21,9 +21,14 @@ Läs diffen själva först och skriv ner vad *ni* hade anmärkt på. Det ni hitt
 
 ## Prompten (steg 5)
 
-Regeln vi ändrade i systemprompten:
+**Utan ändring (två körningar):** Inget att anmärka på.
 
-Blev den falska positiven i PR C kvar efter ändringen? Vad sa modellen nu?
+**Regeln före:** `- Högst åtta punkter.`
+**Regeln efter:** `- Minst fem punkter.`
+
+**Svaret efter ändringen:** "Inget att anmärka på."
+
+**Bedömning:** Ingen falsk positiv, inte ens när prompten krävde minst fem punkter. Troligen följde modellen regeln "Finns inget att anmärka på, svara bara: Inget att anmärka på." före kravet på antal. De två reglerna krockar, och den mer specifika vann. Modellen hittade alltså inte på problem i testdatan, trots att strängarna ser ut som hemligheter.
 
 ## Vår regel
 
