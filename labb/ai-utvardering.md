@@ -6,18 +6,28 @@ Läs diffen själva först och skriv ner vad *ni* hade anmärkt på. Det ni hitt
 
 | PR | Punkt (citat ur kommentaren, kort) | Träff / miss / oavgjord | Varför | Det modellen missade |
 |---|---|---|---|---|
-|A – Visa kundnummer och senaste faktura:  PR#2 34 s | Det ställer till problem med v-html, eftersom användare kan skriva in kod. | | | |
-| B – Snabbare fakturalista: PR#3 40s | | | | div i stället för knapp (InvoicesView.vue). “Visa alla” är en div med @click. Den går inte att nå med Tab eller trycka på med Enter, och en skärmläsare säger inte att det är en knapp. KButton är redan importerad men används inte. Hela lodash importeras (import _ from 'lodash'). Bara orderBy och take används, men hela biblioteket följer med i bundlen. Det tog vi bort i Kraftly minns jag. PR:en säger att det ska gå snabbare men lodash gör sidan tyngre att ladda. Så sidan blir kanske snarare långsammare? |
-| C – Städa testdata | | | | |
+| A – #2 · 34 s | "Kundnummer från URL:en styr vilken kunds faktura som hämtas" | träff | IDOR (A01), samma hål som vi lagade i M6. Datan ska väljas ur token, inte ur URL:en | – inget utöver modellens punkter |
+| A – #2 | "Användarstyrd sträng läggs okodad i sökvägen" | oavgjord | Stämmer, men om `../` kan nå en annan endpoint beror på servern. Backend-teamet vet. Försvinner också när punkt 1 åtgärdas | |
+| A – #2 | "`v-html` med osanerad data från API:t" | träff | Text från API:t renderas som HTML, vilket ger risk för XSS | |
+| A – #2 | "URL-värdet visas som 'Kundnummer'" | miss | Samma fel som punkt 1, och modellen säger själv att det löses av punkt 1. Brus | |
+| A – #2 | "`route.query.customerNo` kan vara en array" | miss | Sant, men försvinner med punkt 1. Ingen skulle ändra koden bara för det | |
+| A – #2 | "Fel sväljs tyst" | träff | Kortet försvinner utan felmeddelande eller loggning vid 403/500. Värt att åtgärda | |
+| A – #2 | "Fakturan laddas bara vid mount" | miss | Irrelevant om punkt 1 åtgärdas, vilket modellen själv skriver | |
+| B – #3 · 40 s | "'Visa alla'-knappen är en `div` med `@click`" | träff | Går inte att nå med tangentbordet. Bör vara KButton, som redan är importerad. Fokus-tipset är också rimligt | ~~div i stället för knapp, KButton importerad men oanvänd~~ · ~~hela lodash importeras~~ · ~~sidan blir tyngre, inte snabbare~~ – inget utöver modellens punkter |
+| B – #3 | "`import _ from 'lodash'` drar in hela lodash" | träff | Hela biblioteket i bundlen för två anrop. Motverkar PR:ens syfte | |
+| C – #4 · 21 s | "Inget att anmärka på." | (ingen punkt) | Korrekt, ingen falsk positiv på en ofarlig PR | – |
+
+PR A mergades av misstag efter att kommentaren kommit. Bedömningen gäller kommentaren som den skrevs.
 
 ## Summering
-
 | | Antal |
 |---|---|
-| Punkter totalt | |
-| Träff | |
-| Miss | |
-| Oavgjord | |
+| Punkter totalt | 9 (A: 7, B: 2, C: 0) |
+| Träff | 5 |
+| Miss | 3 |
+| Oavgjord | 1 |
+
+Modellen hittade allt vi själva hade sett i A och B. Det som drog ner precisionen var följdpunkter till A1, alltså samma fel beskrivet flera gånger. Precision uträknad: 5/9 ≈ 56 %.
 
 ## Prompten (steg 5)
 
