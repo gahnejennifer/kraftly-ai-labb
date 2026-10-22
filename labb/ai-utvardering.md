@@ -6,7 +6,7 @@ Läs diffen själva först och skriv ner vad *ni* hade anmärkt på. Det ni hitt
 
 | PR | Punkt (citat ur kommentaren, kort) | Träff / miss / oavgjord | Varför | Det modellen missade |
 |---|---|---|---|---|
-| A – Visa kundnummer och senaste faktura | | | | |
+|A – Visa kundnummer och senaste faktura:  PR#2 34 s | Det ställer till problem med v-html, eftersom användare kan skriva in kod. | | | |
 | B – Snabbare fakturalista | | | | |
 | C – Städa testdata | | | | |
 
